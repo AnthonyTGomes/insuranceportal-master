@@ -3,7 +3,7 @@ import psycopg2
 from django.conf import settings
 import json
 from db import get_db_connection, call_db_function
-from livestock_management_system.helper.model_class import HealthRecordRequest
+from livestock_management_system.helper.model_class import HealthRecordRequest, _response
 
 '''
  # @ Author: Tanmay Anthony Gomes
@@ -55,7 +55,13 @@ def add_assets_health_record(record: HealthRecordRequest):
     except Exception as ex:
         return _response("error", str(ex))
 
-
+'''
+ # @ Author: Tanmay Anthony Gomes
+ # @ Create Time: 2025-06-11 15:01:24
+ # @ Modified by: Tanmay Anthony Gomes
+ # @ Modified time: 2025-06-12 17:44:57
+ # @ Description: To get Live stock's health records
+ '''
 def get_assets_health_record(record: HealthRecordRequest):
     try:
         with get_db_connection() as conn: # calling get_db_connection for getting the connection string
@@ -73,13 +79,5 @@ def get_assets_health_record(record: HealthRecordRequest):
 
     except Exception as ex:
         return _response("error", str(ex))
-
-
-def _response(status, message, data=None):
-    return {
-        "status": status,
-        "message": message,
-        "data": data or []
-    }
 
 
