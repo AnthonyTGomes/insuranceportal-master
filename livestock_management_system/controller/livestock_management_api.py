@@ -20,7 +20,6 @@ def fetch_assets(request):
     result = get_assets_list(start_record, page_size)
     return JsonResponse(result)
 
-
 def create_health_record(request):
     # try:
         data = json.loads(request.body)
