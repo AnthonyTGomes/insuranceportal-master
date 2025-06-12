@@ -12,3 +12,6 @@ class HealthRecordRequest(BaseModel):
     asset_id: int
     by_user_id: int
     current_status_id: int
+    start_record : int
+    page_size: int
+    

@@ -56,6 +56,25 @@ def add_assets_health_record(record: HealthRecordRequest):
         return _response("error", str(ex))
 
 
+def get_assets_health_record(record: HealthRecordRequest):
+    try:
+        with get_db_connection() as conn: # calling get_db_connection for getting the connection string
+            rows = call_db_function(conn, "public.fn_get_assets_health_record_list", [record.json()]) # calling fn_get_assets_list function from DB  to get data.
+
+            if not rows:
+                return _response("failed", "Error Occured While Processing Request")
+
+            result = rows[0]  
+            data = result["data"]
+            if isinstance(data, str):
+                data = json.loads(data)
+
+            return _response(result["status"], result["message"], data)
+
+    except Exception as ex:
+        return _response("error", str(ex))
+
+
 def _response(status, message, data=None):
     return {
         "status": status,

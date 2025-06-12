@@ -28,3 +28,12 @@ def create_health_record(request):
         return JsonResponse(result)
     # except ValidationError as e:
     #     return JsonResponse({"status": "failed", "errors": e.errors()}, status=400)
+
+def get_health_record(request):
+    # try:
+        data = json.loads(request.body)
+        record = HealthRecordRequest(**data)  # validation happens here        
+        result = add_assets_health_record(record)  # validation happens here
+        return JsonResponse(result)
+    # except ValidationError as e:
+    #     return JsonResponse({"status": "failed", "errors": e.errors()}, status=400)   
