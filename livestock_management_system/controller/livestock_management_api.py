@@ -3,7 +3,6 @@ from django.http import JsonResponse
 from livestock_management_system.helper.livestock_management_helper_class import HealthRecordRequest, add_asset_vaccination_schedule, get_asset_medical_condition, get_asset_medical_condition_severity, get_asset_vaccination_schedule, get_assets_list, add_assets_health_record,get_assets_health_record, get_asset_vaccine_list
 from django.views.decorators.http import require_GET
 from pydantic import ValidationError
-
 from livestock_management_system.helper.model_class import AssetMedicalConditionRequest, AssetMedicalConditionSeverityRequest, VaccinationScheduleRequest, VaccineRequest
 
 '''
