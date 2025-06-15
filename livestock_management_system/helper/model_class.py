@@ -40,6 +40,17 @@ class VaccinationScheduleRequest(BaseModel):
     start_record : Optional[int] = None
     page_size: Optional[int] = None
 
+
+class AssetMedicalConditionRequest(BaseModel):
+    id: int = None
+    name: Optional[str] = None,
+    start_record : Optional[int] = None
+    page_size: Optional[int] = None
+
+class AssetMedicalConditionSeverityRequest(BaseModel):
+    id: int = None
+    name: Optional[str] = None
+
 '''
  # @ Author: Tanmay Anthony Gomes
  # @ Create Time: 2025-06-12 15:13:41
