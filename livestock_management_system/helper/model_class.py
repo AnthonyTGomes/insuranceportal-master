@@ -16,7 +16,12 @@ class HealthRecordRequest(BaseModel):
     start_record : Optional[int] = None
     page_size: Optional[int] = None
 
-
+class VaccineRequest(BaseModel):
+    id: Optional[int] = None
+    name: Optional[str] = None
+    remarks: Optional[str] = None
+    start_record : Optional[int] = None
+    page_size: Optional[int] = None
 
 '''
  # @ Author: Tanmay Anthony Gomes
