@@ -23,6 +23,23 @@ class VaccineRequest(BaseModel):
     start_record : Optional[int] = None
     page_size: Optional[int] = None
 
+
+class VaccinationScheduleRequest(BaseModel):
+    id: Optional[int] = None
+    asset_id: Optional[int] = None
+    vaccine_id: Optional[int] = None
+    due_date: Optional[datetime] = None
+    is_completed: Optional[bool] = None
+    completed_at: Optional[datetime] = None
+    remarks: Optional[str] = None
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
+    is_active: Optional[bool] = None
+    created_by: Optional[int] = None
+    modified_by: Optional[int] = None           
+    start_record : Optional[int] = None
+    page_size: Optional[int] = None
+
 '''
  # @ Author: Tanmay Anthony Gomes
  # @ Create Time: 2025-06-12 15:13:41
