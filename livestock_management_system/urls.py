@@ -11,6 +11,6 @@ urlpatterns = [
     path('get-vaccination-schedule/', livestock_management_api.get_vaccination_schedule, name='get_vaccination_schedule'),  
     path('get-medical-condition/', livestock_management_api.get_medical_condition, name='get_medical_condition'),     
     path('get-medical-condition-severity/', livestock_management_api.get_medical_condition_severity, name='get_medical_condition_severity'),     
-    path('get-medical-condition-severity/', livestock_management_api.get_income_expense_list, name='get_income_expense_list'),  
+    path('get-income-expense-list/', livestock_management_api.get_income_expense_list, name='get_income_expense_list'),  
     path('add-income-expense/', livestock_management_api.create_income_expense, name='create_income_expense'),           
 ]
