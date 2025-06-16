@@ -17,7 +17,7 @@ class HealthRecordRequest(BaseModel):
     page_size: Optional[int] = None
 
 class VaccineRequest(BaseModel):
-    id: Optional[int] = None
+    id: Optional[int] = None 
     name: Optional[str] = None
     remarks: Optional[str] = None
     start_record : Optional[int] = None
@@ -42,14 +42,27 @@ class VaccinationScheduleRequest(BaseModel):
 
 
 class AssetMedicalConditionRequest(BaseModel):
-    id: int = None
-    name: Optional[str] = None,
+    id: Optional[int] = None
+    name: Optional[str] = None
     start_record : Optional[int] = None
     page_size: Optional[int] = None
 
 class AssetMedicalConditionSeverityRequest(BaseModel):
-    id: int = None
+    id: Optional[int] = None
     name: Optional[str] = None
+    start_record : Optional[int] = None
+    page_size: Optional[int] = None
+
+class IncomeExpenseRequest(BaseModel):
+    ledger_id: Optional[int] = None
+    amount: Optional[int] = None
+    txn_date: Optional[datetime] = None
+    description: Optional[str] = None
+    organization_id: Optional[int] = None
+    branch_id: Optional[int] = None
+    created_by: Optional[int] = None
+    start_record : Optional[int] = None
+    page_size: Optional[int] = None
 
 '''
  # @ Author: Tanmay Anthony Gomes

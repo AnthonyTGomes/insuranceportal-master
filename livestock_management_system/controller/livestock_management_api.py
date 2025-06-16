@@ -1,9 +1,9 @@
 import json
 from django.http import JsonResponse
-from livestock_management_system.helper.livestock_management_helper_class import HealthRecordRequest, add_asset_vaccination_schedule, get_asset_medical_condition, get_asset_medical_condition_severity, get_asset_vaccination_schedule, get_assets_list, add_assets_health_record,get_assets_health_record, get_asset_vaccine_list
+from livestock_management_system.helper.livestock_management_helper_class import HealthRecordRequest, add_asset_vaccination_schedule, add_gls_income_expense, get_asset_medical_condition, get_asset_medical_condition_severity, get_asset_vaccination_schedule, get_assets_list, add_assets_health_record,get_assets_health_record, get_asset_vaccine_list, get_gls_income_expense_list
 from django.views.decorators.http import require_GET
 from pydantic import ValidationError
-from livestock_management_system.helper.model_class import AssetMedicalConditionRequest, AssetMedicalConditionSeverityRequest, VaccinationScheduleRequest, VaccineRequest
+from livestock_management_system.helper.model_class import AssetMedicalConditionRequest, AssetMedicalConditionSeverityRequest, IncomeExpenseRequest, VaccinationScheduleRequest, VaccineRequest
 
 '''
  # @ Author: Tanmay Anthony Gomes
@@ -133,4 +133,37 @@ def get_medical_condition_severity(request):
         result = get_asset_medical_condition_severity(record)  # validation happens here
         return JsonResponse(result)
      except ValidationError as e:
-         return JsonResponse({"status": "failed", "errors": e.errors()}, status=400)                         
+         return JsonResponse({"status": "failed", "errors": e.errors()}, status=400)            
+
+
+'''
+ # @ Author: Tanmay Anthony Gomes
+ # @ Create Time: 2025-06-11 15:00:13
+ # @ Modified by: Tanmay Anthony Gomes
+ # @ Modified time: 2025-06-16 11:04:31
+ # @ Description: This api will get the List of incomes and expenses
+ '''
+def get_income_expense_list(request):
+     try:
+        data = json.loads(request.body)
+        record = IncomeExpenseRequest(**data)  # validation happens here        
+        result = get_gls_income_expense_list(record)  # validation happens here
+        return JsonResponse(result)
+     except ValidationError as e:
+         return JsonResponse({"status": "failed", "errors": e.errors()}, status=400)                
+
+'''
+ # @ Author: Tanmay Anthony Gomes
+ # @ Create Time: 2025-06-11 15:00:13
+ # @ Modified by: Tanmay Anthony Gomes
+ # @ Modified time: 2025-06-16 11:04:31
+ # @ Description: This api will add the incomes and expenses
+ '''
+def create_income_expense(request):
+     try:
+        data = json.loads(request.body)
+        record = IncomeExpenseRequest(**data)  # validation happens here        
+        result = add_gls_income_expense(record)  # validation happens here
+        return JsonResponse(result)
+     except ValidationError as e:
+         return JsonResponse({"status": "failed", "errors": e.errors()}, status=400)               
