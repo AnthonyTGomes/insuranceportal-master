@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from livestock_management_system.helper.livestock_management_helper_class import HealthRecordRequest, add_asset_vaccination_schedule, add_gls_income_expense, get_asset_medical_condition, get_asset_medical_condition_severity, get_asset_vaccination_schedule, get_assets_list, add_assets_health_record,get_assets_health_record, get_asset_vaccine_list, get_gls_income_expense_list
 from django.views.decorators.http import require_GET
 from pydantic import ValidationError
-from livestock_management_system.helper.model_class import AssetMedicalConditionRequest, AssetMedicalConditionSeverityRequest, IncomeExpenseRequest, VaccinationScheduleRequest, VaccineRequest
+from livestock_management_system.helper.model_class import AssetInfoRequest, AssetMedicalConditionRequest, AssetMedicalConditionSeverityRequest, IncomeExpenseRequest, VaccinationScheduleRequest, VaccineRequest
 
 '''
  # @ Author: Tanmay Anthony Gomes
@@ -14,12 +14,13 @@ from livestock_management_system.helper.model_class import AssetMedicalCondition
 '''
 @require_GET
 def fetch_assets(request):
-    # Extract pagination params (with defaults)
-    start_record = int(request.GET.get("page", 1))
-    page_size = int(request.GET.get("size", 10))
-
-    result = get_assets_list(start_record, page_size)
-    return JsonResponse(result)
+     try:
+        data = json.loads(request.body)
+        record = AssetInfoRequest(**data)  # validation happens here        
+        result = get_assets_list(record)  # validation happens here
+        return JsonResponse(result)
+     except ValidationError as e:
+         return JsonResponse({"status": "failed", "errors": e.errors()}, status=400)
 
 '''
  # @ Author: Tanmay Anthony Gomes

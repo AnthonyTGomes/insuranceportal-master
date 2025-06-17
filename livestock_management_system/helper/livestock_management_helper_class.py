@@ -3,7 +3,7 @@ import psycopg2
 from django.conf import settings
 import json
 from db import get_db_connection, call_db_function
-from livestock_management_system.helper.model_class import AssetMedicalConditionRequest, AssetMedicalConditionSeverityRequest, HealthRecordRequest, IncomeExpenseRequest, VaccinationScheduleRequest, _response, VaccineRequest
+from livestock_management_system.helper.model_class import AssetInfoRequest, AssetMedicalConditionRequest, AssetMedicalConditionSeverityRequest, HealthRecordRequest, IncomeExpenseRequest, VaccinationScheduleRequest, _response, VaccineRequest
 
 '''
  # @ Author: Tanmay Anthony Gomes
@@ -12,10 +12,10 @@ from livestock_management_system.helper.model_class import AssetMedicalCondition
  # @ Modified time: 2025-06-11 15:58:18
  # @ Description: Function for getting asset list from DB
 '''
-def get_assets_list(start_record: int, page_size: int):
+def get_assets_list(record: AssetInfoRequest):
     try:
         with get_db_connection() as conn: # calling get_db_connection for getting the connection string
-            rows = call_db_function(conn, "public.fn_get_assets_list", (start_record, page_size)) # calling fn_get_assets_list function from DB  to get data.
+            rows = call_db_function(conn, "public.fn_get_assets_list", [record.json()]) # calling fn_get_assets_list function from DB  to get data.
 
             if not rows:
                 return _response("failed", "Error Occured While Processing Request")

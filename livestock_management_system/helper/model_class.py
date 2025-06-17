@@ -64,6 +64,10 @@ class IncomeExpenseRequest(BaseModel):
     start_record : Optional[int] = None
     page_size: Optional[int] = None
 
+class AssetInfoRequest(BaseModel):
+    start_record : Optional[int] = None
+    page_size: Optional[int] = None
+
 '''
  # @ Author: Tanmay Anthony Gomes
  # @ Create Time: 2025-06-12 15:13:41
