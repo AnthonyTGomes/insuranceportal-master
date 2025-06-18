@@ -68,6 +68,31 @@ class AssetInfoRequest(BaseModel):
     start_record : Optional[int] = None
     page_size: Optional[int] = None
 
+class GlsLedgersRequest(BaseModel):
+    ledger_id: int = None
+    code: Optional[str] = None
+    name_ledger: Optional[str] = None
+    name_ledger_bangla: Optional[str] = None
+    type: Optional[str] = None
+    is_control_item: Optional[bool] = None
+    is_cost_revinue_center: Optional[bool] = None
+    is_product_line: Optional[bool] = None
+    is_vendor: Optional[bool] = None
+    is_customer: Optional[bool] = None
+    sort: Optional[int] = None
+    created_at: Optional[datetime] = None
+    modified_at: Optional[datetime] = None
+    gls_organization_id: Optional[int] = None
+    is_cash: Optional[bool] = None
+    is_bank: Optional[bool] = None
+    is_petty_cash: Optional[bool] = None
+    is_petty_cash_expense: Optional[bool] = None
+    is_ie_account: Optional[bool] = None
+    is_bank_investment: Optional[bool] = None
+    created_by: Optional[int] = None
+    modified_by: Optional[int] = None
+    ledger_activity: Optional[str] = None
+
 '''
  # @ Author: Tanmay Anthony Gomes
  # @ Create Time: 2025-06-12 15:13:41

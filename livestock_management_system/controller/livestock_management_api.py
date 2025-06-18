@@ -1,9 +1,9 @@
 import json
 from django.http import JsonResponse
-from livestock_management_system.helper.livestock_management_helper_class import HealthRecordRequest, add_asset_vaccination_schedule, add_gls_income_expense, get_asset_medical_condition, get_asset_medical_condition_severity, get_asset_vaccination_schedule, get_assets_list, add_assets_health_record,get_assets_health_record, get_asset_vaccine_list, get_gls_income_expense_list
+from livestock_management_system.helper.livestock_management_helper_class import HealthRecordRequest, add_asset_vaccination_schedule, add_gls_income_expense, get_asset_medical_condition, get_asset_medical_condition_severity, get_asset_vaccination_schedule, get_assets_list, add_assets_health_record,get_assets_health_record, get_asset_vaccine_list, get_gls_income_expense_list, get_gls_ledger_list
 from django.views.decorators.http import require_GET
 from pydantic import ValidationError
-from livestock_management_system.helper.model_class import AssetInfoRequest, AssetMedicalConditionRequest, AssetMedicalConditionSeverityRequest, IncomeExpenseRequest, VaccinationScheduleRequest, VaccineRequest
+from livestock_management_system.helper.model_class import AssetInfoRequest, AssetMedicalConditionRequest, AssetMedicalConditionSeverityRequest, GlsLedgersRequest, IncomeExpenseRequest, VaccinationScheduleRequest, VaccineRequest
 
 '''
  # @ Author: Tanmay Anthony Gomes
@@ -167,4 +167,21 @@ def create_income_expense(request):
         result = add_gls_income_expense(record)  # validation happens here
         return JsonResponse(result)
      except ValidationError as e:
-         return JsonResponse({"status": "failed", "errors": e.errors()}, status=400)               
+         return JsonResponse({"status": "failed", "errors": e.errors()}, status=400)    
+
+
+'''
+ # @ Author: Tanmay Anthony Gomes
+ # @ Create Time: 2025-06-11 15:00:13
+ # @ Modified by: Tanmay Anthony Gomes
+ # @ Modified time: 2025-06-18 11:04:31
+ # @ Description: This api will get ledger list
+ '''
+def get_ledger_list(request):
+     try:
+        data = json.loads(request.body)
+        record = GlsLedgersRequest(**data)  # validation happens here        
+        result = get_gls_ledger_list(record)  # validation happens here
+        return JsonResponse(result)
+     except ValidationError as e:
+         return JsonResponse({"status": "failed", "errors": e.errors()}, status=400)                   
