@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
+from logging import config
 import os
 from datetime import timedelta
 from pathlib import Path
@@ -214,3 +215,15 @@ CORS_ALLOWED_ORIGINS = [
     "https://insuranceportal.insurecow.com",
 ]
 DATA_UPLOAD_MAX_MEMORY_SIZE = 50971520
+
+BULKSMS_CONFIG = {
+    "USERNAME": config("BULKSMS_USERNAME"),
+    "PASSWORD": config("BULKSMS_PASSWORD"),
+    "APICODE": config("BULKSMS_APICODE"),
+    "CLI": config("BULKSMS_CLI"),
+    "COUNTRY_CODE": config("BULKSMS_COUNTRYCODE"),
+    "BILL_MSISDN": config("BULKSMS_BILLMSISDN"),
+    "TRAN_TYPE": config("BULKSMS_TRANTYPE"),
+    "REQUEST_TYPE": config("BULKSMS_REQUESTTYPE"),
+    "RN_CODE": config("BULKSMS_RNCODE"),
+}
