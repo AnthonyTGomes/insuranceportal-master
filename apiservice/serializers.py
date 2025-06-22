@@ -9,6 +9,7 @@ from rest_framework.exceptions import AuthenticationFailed
 
 from authservice.models import *
 from insuranceservice.models import *
+from sms_management_system.controller.sms_management_api import send_sms
 
 
 def validate_mobile_number(value):
@@ -101,6 +102,19 @@ class Step1Serializer(serializers.Serializer):
 
             # Replace print with proper logging or SMS sending
             print(f"OTP sent: {otp_code}")
+            
+            # Prepare data for SMS [By T.A.G]
+            sms_data = {
+                'msisdn': mobile_number,
+                'message': f"Your OTP for InsureCow Insurance Portal is {otp_code}. Enter this code to complete your action."
+            }
+            # Call the refactored send_sms function [By T.A.G]
+            response_from_sms_service = send_sms(sms_data)    # this function will send OTP To th euser
+            
+            if response_from_sms_service.get("status") != "success":
+               raise serializers.ValidationError({"detail": "OTP not sent. Error: " + response_from_sms_service.get("error", "Unknown")})
+
+
             return temp_user
 
         except IntegrityError as e:
