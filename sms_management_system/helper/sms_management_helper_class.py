@@ -2,7 +2,8 @@
 from django.conf import settings
 import requests
 
-from livestock_management_system.helper.model_class import _response
+
+from common.common_class.util import _response
 from sms_management_system.helper.model_class import SendSMSRequest
 
 API_URL = "https://corpsms.banglalink.net/bl/api/v1/smsapigw/"
