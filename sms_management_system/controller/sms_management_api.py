@@ -9,7 +9,7 @@ from sms_management_system.helper.sms_management_helper_class import send_sms_re
  # @ Create Time: 2025-06-11 15:00:13
  # @ Modified by: Tanmay Anthony Gomes
  # @ Modified time: 2025-06-18 11:04:31
- # @ Description: This a fucntion will Send The Request to the providers server to send SMS
+ # @ Description: This a fucntion will Send The Request to the providers server to send SMS. This is not an APi Function
  '''
 def send_sms(request):
      try:
