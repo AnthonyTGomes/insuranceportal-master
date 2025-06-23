@@ -256,6 +256,8 @@ class Token(models.Model):
         """
         Generate a new pair of access and refresh tokens.
         """
+
+
         if force or not self.access_token or not self.refresh_token or not self.is_token_valid():
             try:
                 refresh = RefreshToken.for_user(self.user)

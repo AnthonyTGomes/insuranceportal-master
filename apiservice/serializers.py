@@ -34,10 +34,10 @@ class LoginSerializer(serializers.Serializer):
         if not user.is_active:
             raise AuthenticationFailed("This account is disabled.")
 
+        print(f"Before Token: ")
         # Get or create token for user
         token_obj, _ = Token.objects.get_or_create(user=user)
         token_obj.generate_tokens()
-
         return {
             'role': user.role.name if user.role else None,
             'access_token': token_obj.access_token,
