@@ -1,4 +1,5 @@
 # smsapi/class/sms_client.py
+import json
 from django.conf import settings
 import requests
 
@@ -33,6 +34,8 @@ def send_sms_request(request: SendSMSRequest):
             resp_data = response.json()
             return _response("success", "SMS sent successfully", resp_data)
         else:
+            print("Payload:", json.dumps(payload, indent=2))
+            print("Result:", response)
             return _response("failed", f"HTTP Error: {response.status_code}", response.text)
 
     except Exception as ex:

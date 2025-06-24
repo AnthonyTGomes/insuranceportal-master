@@ -245,6 +245,7 @@ class Token(models.Model):
         """
         try:
             token = AccessToken(self.access_token)
+
             # Check if the token has expired
             if datetime.fromtimestamp(token['exp'], timezone.utc) > datetime.now(timezone.utc):
                 return True

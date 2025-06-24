@@ -3,6 +3,6 @@ from pydantic import BaseModel
 
 # Model Class for SMS request
 class SendSMSRequest(BaseModel):
-    msisdn: Optional[str] = None
-    message: Optional[int] = None
+    msisdn: Optional[list[str]] = None
+    message: Optional[str] = None
     clienttransid: Optional[str] = None
