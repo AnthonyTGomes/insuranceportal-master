@@ -28,15 +28,8 @@ SECRET_KEY = 'django-insecure-)#(tixf1(13q4iko$1pkws7%!e^+_t+@gc!+!v4t+z7g0%cyg^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-# for local
-#ALLOWED_HOSTS = ['15.206.234.123','*']
-ALLOWED_HOSTS = [
-    "insuranceportal.insurecow.com",
-    "insuranceportal-backend.insurecow.com",
-    "15.206.234.123",  # if needed for direct IP access
-]
+ALLOWED_HOSTS = ['15.206.234.123','*']
 
-CORS_ALLOW_CREDENTIALS =True
 
 # Application definition
 
@@ -72,9 +65,9 @@ REST_FRAMEWORK = {
     )
 }
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',    
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
