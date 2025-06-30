@@ -207,7 +207,7 @@ SIMPLE_JWT = {
 }
 
 # CORS Configuration
-CORS_ALLOW_ALL_ORIGINS = True
+#CORS_ALLOW_ALL_ORIGINS = True
 APPEND_SLASH = True
 # settings.py
 DATETIME_FORMAT = 'N j, Y, P'  # or any other format you prefer
