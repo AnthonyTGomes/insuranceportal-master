@@ -108,27 +108,27 @@ AUTH_USER_MODEL = 'authservice.User'
 # }
 
 # DB Live
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'insuranceportaldb',
-#         'USER': 'dbmasteruser',
-#         'PASSWORD': 'a?3be+s1J](y}Pm8hLsB.2SFGv~{25TZ',
-#         'HOST': 'ls-5d9b1cb4c8178e417ea09f67c18b3c0b1332bdba.cvgfhs4irem7.ap-south-1.rds.amazonaws.com',
-#         'PORT': '5432',
-#     }
-# }
-# DB Local
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'InsureCow_DEV',
-        'USER': 'postgres',
-        'PASSWORD': '7951',
-        'HOST': 'localhost',
+        'NAME': 'insuranceportaldb',
+        'USER': 'dbmasteruser',
+        'PASSWORD': 'a?3be+s1J](y}Pm8hLsB.2SFGv~{25TZ',
+        'HOST': 'ls-5d9b1cb4c8178e417ea09f67c18b3c0b1332bdba.cvgfhs4irem7.ap-south-1.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
+# DB Local
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'InsureCow_DEV',
+#         'USER': 'postgres',
+#         'PASSWORD': '7951',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation
