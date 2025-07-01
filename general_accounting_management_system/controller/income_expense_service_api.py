@@ -10,7 +10,7 @@ from general_accounting_management_system.helper.general_accounting_management_h
 from general_accounting_management_system.helper.model_class import IncomeExpenseRequest
 
 class IncomeExpenseServiceAPIView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated] # Token Validation
 
     '''
     # @ Author: Tanmay Anthony Gomes

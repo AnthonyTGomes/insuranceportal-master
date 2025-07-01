@@ -1,6 +1,6 @@
 from django.urls import path
 from general_accounting_management_system.controller import general_accounting_management_api
-from general_accounting_management_system.controller.income_expense_service import IncomeExpenseServiceAPIView
+from general_accounting_management_system.controller.income_expense_service_api import IncomeExpenseServiceAPIView
 from general_accounting_management_system.controller.ledger_service_api import LedgerServiceAPIView
 
 
