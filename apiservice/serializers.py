@@ -608,6 +608,28 @@ class ForgotPasswordRequestSerializer(serializers.Serializer):
         )
 
         print(f"Password Reset OTP: {otp_code}")  # TODO: Replace with SMS
+
+        # Prepare data for SMS [By T.A.G]
+        clienttransid = "TXN" + datetime.utcnow().strftime("%Y%m%d%H%M%S%f")[:20]
+        # Example: TXN202506231330590000
+
+        sms_data = {
+                'msisdn': ["880" + mobile_number.lstrip("0")],
+                'clienttransid' : str(clienttransid),
+                'message': f"Your OTP for InsureCow Insurance Portal is {otp_code}. Enter this code to complete your action."
+            }
+        # Call the refactored send_sms function [By T.A.G]
+        response_from_sms_service = send_sms(sms_data)    # this function will send OTP To th euser
+        status = response_from_sms_service.get("status")
+        status_info = response_from_sms_service.get("data", {}).get("statusInfo", {})
+        status_code = status_info.get("statusCode")
+            
+        if status != "success" or status_code != "1000":
+           raise serializers.ValidationError({"detail": "OTP not sent. Error: " + response_from_sms_service.get("error", "Unknown")})
+
+
+
+
         return {"message": "OTP sent to your mobile number."}
 
 from django.utils import timezone
