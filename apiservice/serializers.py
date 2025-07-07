@@ -628,8 +628,6 @@ class ForgotPasswordRequestSerializer(serializers.Serializer):
            raise serializers.ValidationError({"detail": "OTP not sent. Error: " + response_from_sms_service.get("error", "Unknown")})
 
 
-
-
         return {"message": "OTP sent to your mobile number."}
 
 from django.utils import timezone
