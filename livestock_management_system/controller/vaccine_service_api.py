@@ -20,8 +20,7 @@ class VaccineServiceAPIView(APIView):
     '''
     def get(self, request):
         try:
-            data = json.loads(request.body)
-            record = VaccineRequest(**data)  # validation happens here        
+            record = VaccineRequest(**request.data)  # validation happens here        
             result = get_asset_vaccine_list(record)  # validation happens here
             return JsonResponse(result)
         except ValidationError as e:

@@ -20,8 +20,7 @@ class MedicalConditionSeverityServiceAPIView(APIView):
     '''
     def get(self, request):
         try:
-            data = json.loads(request.body)
-            record = AssetMedicalConditionSeverityRequest(**data)  # validation happens here        
+            record = AssetMedicalConditionSeverityRequest(**request.data)  # validation happens here        
             result = get_asset_medical_condition_severity(record)  # validation happens here
             return JsonResponse(result)
         except ValidationError as e:

@@ -20,8 +20,7 @@ class HealthRecordServiceAPIView(APIView):
     '''
     def post(self, request):
         try:
-            data = json.loads(request.body)
-            record = HealthRecordRequest(**data)  # validation happens here        
+            record = HealthRecordRequest(**request.data)  # validation happens here        
             result = add_assets_health_record(record)  # validation happens here
             return JsonResponse(result)
         except ValidationError as e:
@@ -36,8 +35,7 @@ class HealthRecordServiceAPIView(APIView):
     '''
     def get(self, request):
         try:
-            data = json.loads(request.body)
-            record = HealthRecordRequest(**data)  # validation happens here        
+            record = HealthRecordRequest(**request.data)  # validation happens here        
             result = get_assets_health_record(record)  # validation happens here
             return JsonResponse(result)
         except ValidationError as e:

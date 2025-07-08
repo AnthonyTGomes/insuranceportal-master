@@ -20,8 +20,7 @@ class VaccinationScheduleServiceAPIView(APIView):
     '''
     def post(self, request):
         try:
-            data = json.loads(request.body)
-            record = VaccinationScheduleRequest(**data)  # validation happens here        
+            record = VaccinationScheduleRequest(**request.data)  # validation happens here        
             result = add_asset_vaccination_schedule(record)  # validation happens here
             return JsonResponse(result)
         except ValidationError as e:
@@ -36,8 +35,7 @@ class VaccinationScheduleServiceAPIView(APIView):
     '''
     def get(self, request):
         try:
-            data = json.loads(request.body)
-            record = VaccinationScheduleRequest(**data)  # validation happens here        
+            record = VaccinationScheduleRequest(**request.data)  # validation happens here        
             result = get_asset_vaccination_schedule(record)  # validation happens here
             return JsonResponse(result)
         except ValidationError as e:
