@@ -8,6 +8,6 @@ urlpatterns = [
     # path('get-income-expense-list/', general_accounting_management_api.get_income_expense_list, name='get_income_expense_list'),  
     # path('add-income-expense/', general_accounting_management_api.create_income_expense, name='create_income_expense'),         
     # path('get-ledger-list/', general_accounting_management_api.get_ledger_list, name='get_ledger_list'),
-    path('ledger-service/', LedgerServiceAPIView.as_view(), name='ledger-service'),  
-    path('income-expense-service/', IncomeExpenseServiceAPIView.as_view(), name='income-expense-service'),     
+    path('ledger-service', LedgerServiceAPIView.as_view(), name='ledger-service'),  
+    path('income-expense-service', IncomeExpenseServiceAPIView.as_view(), name='income-expense-service'),     
 ]

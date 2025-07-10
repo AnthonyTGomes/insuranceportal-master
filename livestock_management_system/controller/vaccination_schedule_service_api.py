@@ -11,6 +11,12 @@ class VaccinationScheduleServiceAPIView(APIView):
 
     permission_classes = [IsAuthenticated] # For Validating Token
 
+
+    def dispatch(self, request, *args, **kwargs):
+        print(f"🔥 Dispatch received {request.method} request")
+        return super().dispatch(request, *args, **kwargs)
+
+
     '''
     # @ Author: Tanmay Anthony Gomes
     # @ Create Time: 2025-06-11 15:00:13
@@ -20,6 +26,7 @@ class VaccinationScheduleServiceAPIView(APIView):
     '''
     def post(self, request):
         try:
+            #data = request.data
             record = VaccinationScheduleRequest(**request.data)  # validation happens here        
             result = add_asset_vaccination_schedule(record)  # validation happens here
             return JsonResponse(result)
@@ -35,7 +42,8 @@ class VaccinationScheduleServiceAPIView(APIView):
     '''
     def get(self, request):
         try:
-            record = VaccinationScheduleRequest(**request.data)  # validation happens here        
+            #record = VaccinationScheduleRequest(**request.query_params.dict())  # validation happens here    
+            record = VaccinationScheduleRequest(**request.data)  # validation happens here                
             result = get_asset_vaccination_schedule(record)  # validation happens here
             return JsonResponse(result)
         except ValidationError as e:
