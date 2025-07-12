@@ -3,6 +3,8 @@ from django.urls import path
 from livestock_management_system.controller import livestock_management_api
 from livestock_management_system.controller.assets_service_api import AssetsServiceAPIView
 from livestock_management_system.controller.health_record_service_api import HealthRecordServiceAPIView
+from livestock_management_system.controller.health_record_status_history_service_api import HealthRecordStatusHistoryServiceAPIView
+from livestock_management_system.controller.health_status_service_api import HealthStatusServiceAPIView
 from livestock_management_system.controller.medical_condition_service_api import MedicalConditionServiceAPIView
 from livestock_management_system.controller.medical_condition_severity_service_api import MedicalConditionSeverityServiceAPIView
 from livestock_management_system.controller.vaccination_schedule_service_api import VaccinationScheduleServiceAPIView
@@ -22,5 +24,7 @@ urlpatterns = [
     path('medical-condition-service/', MedicalConditionServiceAPIView.as_view(), name='medical-condition-service'),
     path('medical-condition-severity-service/', MedicalConditionSeverityServiceAPIView.as_view(), name='medical-condition-severity-service'),   
     path('vaccination-schedule-service/', VaccinationScheduleServiceAPIView.as_view(), name='vaccination-schedule-service'),   
-    path('vaccine-service/', VaccineServiceAPIView.as_view(), name='vaccine-service'),     
+    path('vaccine-service/', VaccineServiceAPIView.as_view(), name='vaccine-service'),    
+    path('health-record-status-history-service/', HealthRecordStatusHistoryServiceAPIView.as_view(), name='health-record-status-history-service'),
+    path('health-status-service/', HealthStatusServiceAPIView.as_view(), name='health-status-service'),           
 ]

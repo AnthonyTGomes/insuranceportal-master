@@ -174,5 +174,50 @@ def get_asset_medical_condition_severity(record: AssetMedicalConditionSeverityRe
             return _response(result["status"], result["message"], data)
 
     except Exception as ex:
-        return _response("error", str(ex))                  
+        return _response("error", str(ex))
+
+
+'''
+ # @ Author: Tanmay Anthony Gomes
+ # @ Create Time: 2025-06-12 12:44:24
+ # @ Modified by: Tanmay Anthony Gomes
+ # @ Modified time: 
+ # @ Description: Function For Inserting Livestock Health records 
+ '''
+def update_assets_health_record_status(record: HealthRecordRequest):
+    try:
+        with get_db_connection() as conn: # calling get_db_connection for getting the connection string
+            rows = call_db_function(conn, "public.fn_update_assets_health_record_status", [record.json()]) # calling fn_get_assets_list function from DB  to get data.
+
+            if not rows:
+                return _response("failed", "Error Occured While Processing Request")
+
+            result = rows[0]  
+            data = result["data"]
+            if isinstance(data, str):
+                data = json.loads(data)
+
+            return _response(result["status"], result["message"], data)
+
+    except Exception as ex:
+        return _response("error", str(ex))
+    
+
+def get_asset_health_status(record: AssetHealthStatusRequest):
+    try:
+        with get_db_connection() as conn: # calling get_db_connection for getting the connection string
+            rows = call_db_function(conn, "public.fn_get_asset_health_status", [record.json()]) # calling fn_get_assets_list function from DB  to get data.
+
+            if not rows:
+                return _response("failed", "Error Occured While Processing Request")
+
+            result = rows[0]  
+            data = result["data"]
+            if isinstance(data, str):
+                data = json.loads(data)
+
+            return _response(result["status"], result["message"], data)
+
+    except Exception as ex:
+        return _response("error", str(ex))    
     

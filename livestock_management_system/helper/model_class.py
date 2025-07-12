@@ -57,4 +57,9 @@ class AssetInfoRequest(BaseModel):
     start_record : Optional[int] = None
     page_size: Optional[int] = None
 
+class AssetHealthStatusRequest(BaseModel):
+    id: Optional[int] = None
+    name: Optional[str] = None
+    asset_status_id: Optional[int] = None    
+
 
