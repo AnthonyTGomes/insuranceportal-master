@@ -4,7 +4,7 @@ from pydantic import BaseModel, Field
 
 
 class GlsLedgersRequest(BaseModel):
-    ledger_id: int = None
+    ledger_id: Optional[int] = None
     code: Optional[str] = None
     name_ledger: Optional[str] = None
     name_ledger_bangla: Optional[str] = None
