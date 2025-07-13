@@ -23,7 +23,8 @@ class IncomeExpenseServiceAPIView(APIView):
 
     def post(self, request):
         try:
-            record = IncomeExpenseRequest(**request.data)
+            record = build_request_with_user(IncomeExpenseRequest, request, method='POST')
+            #record = IncomeExpenseRequest(**request.data)
             result = add_gls_income_expense(record)
             return JsonResponse(result)
         except ValidationError as e:
