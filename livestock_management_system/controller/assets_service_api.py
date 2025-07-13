@@ -3,6 +3,7 @@ from pydantic import ValidationError
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from apiservice.utils import handle_serializer_error, success_response
+from common.common_class.util import build_request_with_user
 from livestock_management_system.helper.livestock_management_helper_class import get_assets_list
 from livestock_management_system.helper.model_class import AssetInfoRequest
 from rest_framework import status
@@ -19,7 +20,8 @@ class AssetsServiceAPIView(APIView):
     '''
     def get(self, request):
         try:
-            record = AssetInfoRequest(**request.data)
+            record = build_request_with_user(AssetInfoRequest, request, method='GET')
+            #record = AssetInfoRequest(**request.data)
             result = get_assets_list(record)
             return JsonResponse(result)
         except ValidationError as e:

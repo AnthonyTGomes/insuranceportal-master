@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing import Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class GlsLedgersRequest(BaseModel):
@@ -27,6 +27,7 @@ class GlsLedgersRequest(BaseModel):
     created_by: Optional[int] = None
     modified_by: Optional[int] = None
     ledger_activity: Optional[str] = None
+    by_user_id: int = Field(..., description="Auto-injected from request.user.id")
 
 
 class IncomeExpenseRequest(BaseModel):
@@ -39,3 +40,4 @@ class IncomeExpenseRequest(BaseModel):
     created_by: Optional[int] = None
     start_record : Optional[int] = None
     page_size: Optional[int] = None
+    by_user_id: int = Field(..., description="Auto-injected from request.user.id")

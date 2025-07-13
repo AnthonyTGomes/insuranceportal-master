@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from datetime import datetime
 from typing import Optional
 
@@ -11,7 +11,7 @@ class HealthRecordRequest(BaseModel):
     veterinarian: Optional[str] = None
     remarks: Optional[str] = None
     asset_id: Optional[int] = None
-    by_user_id: Optional[int] = None
+    by_user_id: int = Field(..., description="Auto-injected from request.user.id")
     current_status_id: Optional[int] = None
     start_record : Optional[int] = None
     page_size: Optional[int] = None
@@ -22,6 +22,7 @@ class VaccineRequest(BaseModel):
     remarks: Optional[str] = None
     start_record : Optional[int] = None
     page_size: Optional[int] = None
+    by_user_id: int = Field(..., description="Auto-injected from request.user.id")
 
 
 class VaccinationScheduleRequest(BaseModel):
@@ -39,6 +40,7 @@ class VaccinationScheduleRequest(BaseModel):
     modified_by: Optional[int] = None           
     start_record : Optional[int] = None
     page_size: Optional[int] = None
+    by_user_id: int = Field(..., description="Auto-injected from request.user.id")
 
 
 class AssetMedicalConditionRequest(BaseModel):
@@ -46,20 +48,25 @@ class AssetMedicalConditionRequest(BaseModel):
     name: Optional[str] = None
     start_record : Optional[int] = None
     page_size: Optional[int] = None
+    by_user_id: int = Field(..., description="Auto-injected from request.user.id")
 
 class AssetMedicalConditionSeverityRequest(BaseModel):
     id: Optional[int] = None
     name: Optional[str] = None
     start_record : Optional[int] = None
     page_size: Optional[int] = None
+    by_user_id: int = Field(..., description="Auto-injected from request.user.id")
 
 class AssetInfoRequest(BaseModel):
     start_record : Optional[int] = None
     page_size: Optional[int] = None
+    by_user_id: int = Field(..., description="Auto-injected from request.user.id")
+
 
 class AssetHealthStatusRequest(BaseModel):
     id: Optional[int] = None
     name: Optional[str] = None
-    asset_status_id: Optional[int] = None    
+    asset_status_id: Optional[int] = None
+    by_user_id: int = Field(..., description="Auto-injected from request.user.id")    
 
 

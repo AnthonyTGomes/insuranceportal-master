@@ -6,6 +6,7 @@ from apiservice.utils import handle_serializer_error, success_response
 from rest_framework.response import Response
 from rest_framework import status
 
+from common.common_class.util import build_request_with_user
 from livestock_management_system.helper.livestock_management_helper_class import get_asset_health_status
 from livestock_management_system.helper.model_class import AssetHealthStatusRequest
 
@@ -21,6 +22,7 @@ class HealthStatusServiceAPIView(APIView):
     '''
     def get(self, request):
         try:
+            record = build_request_with_user(AssetHealthStatusRequest, request, method='GET')
             record = AssetHealthStatusRequest(**request.data)  # validation happens here        
             result = get_asset_health_status(record)  # validation happens here
             return JsonResponse(result)

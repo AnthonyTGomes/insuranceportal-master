@@ -6,6 +6,7 @@ from apiservice.utils import handle_serializer_error, success_response
 from rest_framework.response import Response
 from rest_framework import status
 
+from common.common_class.util import build_request_with_user
 from general_accounting_management_system.helper.general_accounting_management_helper_class import *
 from general_accounting_management_system.helper.model_class import IncomeExpenseRequest
 
@@ -38,7 +39,8 @@ class IncomeExpenseServiceAPIView(APIView):
 
     def get(self, request):
         try:
-            record = IncomeExpenseRequest(**request.data)
+            record = build_request_with_user(IncomeExpenseRequest, request, method='GET')
+            #record = IncomeExpenseRequest(**request.data)
             result = get_gls_income_expense_list(record)
             return JsonResponse(result)
         except ValidationError as e:

@@ -6,6 +6,7 @@ from apiservice.utils import handle_serializer_error, success_response
 from rest_framework.response import Response
 from rest_framework import status
 
+from common.common_class.util import build_request_with_user
 from livestock_management_system.helper.livestock_management_helper_class import update_assets_health_record_status
 from livestock_management_system.helper.model_class import HealthRecordRequest
 
@@ -46,7 +47,8 @@ class HealthRecordStatusHistoryServiceAPIView(APIView):
 
     def put(self, request):
         try:
-            record = HealthRecordRequest(**request.data)  # validation happens here        
+            record = build_request_with_user(HealthRecordRequest, request, method='PUT')
+            #record = HealthRecordRequest(**request.data)  # validation happens here        
             result = update_assets_health_record_status(record)  # validation happens here
             return JsonResponse(result)
         except ValidationError as e:
