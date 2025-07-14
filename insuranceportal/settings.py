@@ -214,6 +214,8 @@ DATETIME_FORMAT = 'N j, Y, P'  # or any other format you prefer
 JWT_SECRET_KEY = SECRET_KEY
 CORS_ALLOWED_ORIGINS = [
     "https://insuranceportal.insurecow.com",
+    "http://localhost:3000"
+
 ]
 DATA_UPLOAD_MAX_MEMORY_SIZE = 50971520
 
