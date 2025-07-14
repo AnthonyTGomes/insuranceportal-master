@@ -6,13 +6,15 @@ from apiservice.utils import handle_serializer_error, success_response
 from rest_framework.response import Response
 from rest_framework import status
 
+from common.common_class.has_module_access import HasModuleAccess
 from common.common_class.util import build_request_with_user
 from general_accounting_management_system.helper.general_accounting_management_helper_class import *
 from general_accounting_management_system.helper.model_class import IncomeExpenseRequest
 
 class IncomeExpenseServiceAPIView(APIView):
-    permission_classes = [IsAuthenticated] # Token Validation
-
+    #permission_classes = [IsAuthenticated] # Token Validation
+    permission_classes = [IsAuthenticated, HasModuleAccess]
+    required_module = "FARM"
     '''
     # @ Author: Tanmay Anthony Gomes
     # @ Create Time: 2025-06-11 15:00:13

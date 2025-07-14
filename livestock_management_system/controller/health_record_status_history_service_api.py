@@ -6,13 +6,15 @@ from apiservice.utils import handle_serializer_error, success_response
 from rest_framework.response import Response
 from rest_framework import status
 
+from common.common_class.has_module_access import HasModuleAccess
 from common.common_class.util import build_request_with_user
 from livestock_management_system.helper.livestock_management_helper_class import update_assets_health_record_status
 from livestock_management_system.helper.model_class import HealthRecordRequest
 
 class HealthRecordStatusHistoryServiceAPIView(APIView):
-    permission_classes = [IsAuthenticated]
-
+    #permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, HasModuleAccess]
+    required_module = "FARM"
     """
     @ Author: AUTHOR
     @ Create Time: 2025-07-12 4:00 PM
