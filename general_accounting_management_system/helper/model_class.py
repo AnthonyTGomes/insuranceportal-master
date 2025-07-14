@@ -41,3 +41,8 @@ class IncomeExpenseRequest(BaseModel):
     start_record : Optional[int] = None
     page_size: Optional[int] = None
     by_user_id: int = Field(..., description="Auto-injected from request.user.id")
+
+class FMSDashboardRequest(BaseModel):
+    start_record : Optional[int] = None
+    page_size: Optional[int] = None
+    by_user_id: int = Field(..., description="Auto-injected from request.user.id")    
