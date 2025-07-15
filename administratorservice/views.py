@@ -12,6 +12,8 @@ from authservice.models import Role, User, UserPersonalInfo, UserFinancialInfo, 
     OTPVerification
 from insuranceportal.utils import superuser_required
 from insuranceservice.models import InsuranceCompany, AssetInsurance
+from user_management_system.helper.model_class import AuthUserModuleAccessRequest
+from user_management_system.helper.user_management_helper_class import get_auth_module_access
 
 
 @login_required
@@ -402,3 +404,30 @@ def create_insurecow_agent(request):
         # GET method to load roles and display the user creation form
         roles = Role.objects.all()
         return render(request, 'pages/administrator/user/create_insurecow_agent.html', {'roles': roles})
+    
+
+@login_required
+@user_passes_test(superuser_required)
+def user_module_access_list(request):
+    # Prepare the request payload for permission check
+    record = AuthUserModuleAccessRequest(
+        by_user_id=-1,
+        module_code='-1',  # replace with your actual module code if needed
+    )
+
+    # Call the permission function
+    permission_response = get_auth_module_access(record)
+
+    # if permission_response['status'] != 'success':
+    #     # Permission denied - show error or unauthorized page
+    #     return render(request, 'pages/unauthorized.html', {
+    #         'message': permission_response.get('message', 'Permission denied')
+    #     })
+
+    # Permission granted - load actual data from permission_response['data']
+    user_module_access_list = permission_response['data']
+
+    return render(request, 'pages/administrator/user_module_access/user_module_access_list.html', {
+        'user_module_access_list': user_module_access_list,
+        'permissions': permission_response['data'],  # optional
+    })

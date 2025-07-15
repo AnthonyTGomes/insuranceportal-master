@@ -29,7 +29,7 @@ urlpatterns = [
     path('deworming-status/', deworming_status_list, name='deworming_status_list'),
     path('deworming-status/create/', create_deworming_status, name='create_deworming_status'),
 
-
+    path('user-module-access/', user_module_access_list, name='user_module_access_list'),
 
 
 

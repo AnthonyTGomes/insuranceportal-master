@@ -3,10 +3,10 @@
 import json
 from rest_framework.permissions import BasePermission
 from django.db import connection
-
-from common.common_class.common_model_class import AuthUserModuleAccessRequest
 from common.common_class.util import _response
 from db import call_db_function, get_db_connection
+from user_management_system.helper.model_class import AuthUserModuleAccessRequest
+from user_management_system.helper.user_management_helper_class import get_auth_module_access
 
 class HasModuleAccess(BasePermission):
 
@@ -40,21 +40,5 @@ class HasModuleAccess(BasePermission):
 
         return True
 
-def get_auth_module_access(record: AuthUserModuleAccessRequest):
-    try:
-        with get_db_connection() as conn: # calling get_db_connection for getting the connection string
-            rows = call_db_function(conn, "public.fn_get_auth_user_module_permission", [record.json()]) # calling fn_get_assets_list function from DB  to get data.
 
-            if not rows:
-                return _response("failed", "Error Occured While Processing Request")
-
-            result = rows[0]  
-            data = result["data"]
-            if isinstance(data, str):
-                data = json.loads(data)
-
-            return _response(result["status"], result["message"], data)
-
-    except Exception as ex:
-        return _response("error", str(ex))   
     
