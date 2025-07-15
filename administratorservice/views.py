@@ -431,3 +431,20 @@ def user_module_access_list(request):
         'user_module_access_list': user_module_access_list,
         'permissions': permission_response['data'],  # optional
     })
+
+
+@login_required
+@user_passes_test(superuser_required)
+def create_user_module_access(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        description = request.POST.get('description')
+
+        if name:  # Basic validation to check if name is provided
+            create_deworming_status = DewormingStatus.objects.create(name=name, description=description)
+            messages.success(request, 'Deworming status created successfully.')
+            return redirect('administrator_service:user_module_access_list')
+        else:
+            messages.error(request, 'Name field is required.')
+
+    return render(request, 'pages/administrator/user_module_access/create_user_module_access.html')
