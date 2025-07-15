@@ -25,7 +25,7 @@ class HealthStatusServiceAPIView(APIView):
     def get(self, request):
         try:
             record = build_request_with_user(AssetHealthStatusRequest, request, method='GET')
-            record = AssetHealthStatusRequest(**request.data)  # validation happens here        
+            #record = AssetHealthStatusRequest(**request.data)  # validation happens here        
             result = get_asset_health_status(record)  # validation happens here
             return JsonResponse(result)
         except ValidationError as e:
