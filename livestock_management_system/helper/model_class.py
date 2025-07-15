@@ -67,6 +67,20 @@ class AssetHealthStatusRequest(BaseModel):
     id: Optional[int] = None
     name: Optional[str] = None
     asset_status_id: Optional[int] = None
+    start_record : Optional[int] = None
+    page_size: Optional[int] = None
     by_user_id: int = Field(..., description="Auto-injected from request.user.id")    
 
 
+class AssetLocationHistoryRequest(BaseModel):
+    id: int = None
+    asset_id: int = None
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+    created_at: Optional[datetime] = None
+    created_by: Optional[int] = None
+    updated_at: Optional[datetime] = None
+    updated_by: Optional[int] = None
+    start_record : Optional[int] = None
+    page_size: Optional[int] = None
+    by_user_id: int = Field(..., description="Auto-injected from request.user.id")  

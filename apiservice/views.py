@@ -13,6 +13,8 @@ from assetservice.serializers import AssetTypeSerializer, BreedSerializer, Color
 from insuranceportal.utils import IsSuperUser
 from insuranceservice.serializers import AssetInsuranceSerializer, InsuranceClaimSerializer, \
     PaymentInformationSerializer, PaymentInformationDetailSerializer
+from livestock_management_system.helper.livestock_management_helper_class import add_aseet_location
+from livestock_management_system.helper.model_class import AssetLocationHistoryRequest
 from .serializers import *
 from .utils import *
 
@@ -429,12 +431,37 @@ class AssetCreateAPIView(APIView):
         serializer = AssetSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
             try:
-                serializer.save()
+                #serializer.save()
+                asset = serializer.save()
+
+                #Asset Location Entry [By TAG]
+                # Separate asset location logic
+                self.add_location(asset, request)
+
                 return success_response("Asset Created successfully.", data=serializer.data, status_code=status.HTTP_201_CREATED)
             except serializers.ValidationError as e:
                 return handle_serializer_error(e)
 
         return validation_error_from_serializer(serializer)
+    
+    def add_location(self, asset, request):
+        latitude = request.data.get("latitude")
+        longitude = request.data.get("longitude")
+
+        if latitude and longitude:
+            location_data = {
+                "asset_id": asset.id,
+                "latitude": latitude,
+                "longitude": longitude,
+                "by_user_id": request.user.id
+            }
+            response = add_aseet_location(location_data)
+            status = response.get("status")
+
+            if status != "success":
+                raise serializers.ValidationError({
+                    "detail": "Failed to add asset location. Error: " + response.get("error", "Unknown")
+                })
 
 class AssetDetailAPIView(APIView):
     permission_classes = [IsAuthenticated]
