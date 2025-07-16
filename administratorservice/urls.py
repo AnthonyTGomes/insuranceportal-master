@@ -30,7 +30,7 @@ urlpatterns = [
     path('deworming-status/create/', create_deworming_status, name='create_deworming_status'),
 
     path('user-module-access/', user_module_access_list, name='user_module_access_list'),
-    path('user-module-access/create/', create_deworming_status, name='create_user_module_access'),
+    path('user-module-access/create/', create_user_module_access, name='create_user_module_access'),
 
 
     path('users/', users_list, name='users_list'),

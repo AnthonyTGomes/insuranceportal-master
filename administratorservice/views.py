@@ -13,7 +13,7 @@ from authservice.models import Role, User, UserPersonalInfo, UserFinancialInfo, 
 from insuranceportal.utils import superuser_required
 from insuranceservice.models import InsuranceCompany, AssetInsurance
 from user_management_system.helper.model_class import AuthUserModuleAccessRequest
-from user_management_system.helper.user_management_helper_class import get_auth_module_access
+from user_management_system.helper.user_management_helper_class import add_auth_module_access, get_auth_module_access
 
 
 @login_required
@@ -436,15 +436,29 @@ def user_module_access_list(request):
 @login_required
 @user_passes_test(superuser_required)
 def create_user_module_access(request):
+    user = User.objects.all()
+
     if request.method == 'POST':
-        name = request.POST.get('name')
-        description = request.POST.get('description')
+        try:
+            user = request.POST.get('user')  # optional, not used in logic
+            module = request.POST.get('module')  # optional
 
-        if name:  # Basic validation to check if name is provided
-            create_deworming_status = DewormingStatus.objects.create(name=name, description=description)
-            messages.success(request, 'Deworming status created successfully.')
-            return redirect('administrator_service:user_module_access_list')
-        else:
-            messages.error(request, 'Name field is required.')
+            record = AuthUserModuleAccessRequest(
+                by_user_id=request.user.id,
+                user_id=user,         
+                module_code=module    
+            )
 
-    return render(request, 'pages/administrator/user_module_access/create_user_module_access.html')
+            # Call DB function
+            permission_response = add_auth_module_access(record)
+
+            if permission_response['status'] == 'success':
+                messages.success(request, 'Module access created successfully.')
+                return redirect('administrator_service:user_module_access_list')  # adjust URL name
+            else:
+                messages.error(request, permission_response.get('message', 'Failed to create access.'))
+
+        except Exception as e:
+            messages.error(request, f"Error occurred: {str(e)}")
+
+    return render(request, 'pages/administrator/user_module_access/create_user_module_access.html', {'user': user})
