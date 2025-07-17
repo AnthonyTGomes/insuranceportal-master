@@ -113,7 +113,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'insuranceportaldb',
         'USER': 'dbmasteruser',
-        'PASSWORD': 'a?3be+s1J](y}Pm8hLsB.2SFGv~{25TZ',
+        'PASSWORD': '^`0JW6IuZ12kpRvMr#j_bUyv-,gT8d>L',
         'HOST': 'ls-5d9b1cb4c8178e417ea09f67c18b3c0b1332bdba.cvgfhs4irem7.ap-south-1.rds.amazonaws.com',
         'PORT': '5432',
     }
