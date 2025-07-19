@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-from decouple import config  # <-- correct import
+from decouple import config  
 
 import os
 from datetime import timedelta
@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-)#(tixf1(13q4iko$1pkws7%!e^+_t+@gc!+!v4t+z7g0%cyg^'
+SECRET_KEY = config("JWT_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -107,29 +107,17 @@ AUTH_USER_MODEL = 'authservice.User'
 #     }
 # }
 
-# DB Live
+# DB
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'insuranceportaldb',
-        'USER': 'dbmasteruser',
-        'PASSWORD': '^`0JW6IuZ12kpRvMr#j_bUyv-,gT8d>L',
-        'HOST': 'ls-5d9b1cb4c8178e417ea09f67c18b3c0b1332bdba.cvgfhs4irem7.ap-south-1.rds.amazonaws.com',
-        'PORT': '5432',
+        'ENGINE': config("POSTGRE_DB_ENGINE"),
+        'NAME': config("POSTGRE_DB_NAME"),
+        'USER': config("POSTGRE_DB_USER"),
+        'PASSWORD': config("POSTGRE_DB_PASSWORD"),
+        'HOST': config("POSTGRE_DB_HOST"),
+        'PORT': config("POSTGRE_DB_PORT"),
     }
 }
-# DB Local
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'InsureCow_DEV',
-#         'USER': 'postgres',
-#         'PASSWORD': '7951',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
