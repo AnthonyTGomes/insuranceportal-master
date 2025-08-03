@@ -9,7 +9,7 @@ from rest_framework import status
 from insurance_management_system.helper.insurance_management_helper_class import get_insurance_farmers_list
 from insurance_management_system.helper.model_class import FarmersInfoRequest
 
-class InsuranceServiceAPIView(APIView):
+class FarmerServiceAPIView(APIView):
     #permission_classes = [IsAuthenticated] # For Validating Token
     permission_classes = [IsAuthenticated, HasModuleAccess]
     required_module = "FARM"
