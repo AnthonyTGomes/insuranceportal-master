@@ -6,7 +6,7 @@ from apiservice.utils import handle_serializer_error, success_response
 from common.common_class.has_module_access import HasModuleAccess
 from common.common_class.util import build_request_with_user
 from rest_framework import status
-from insurance_management_system.helper.insurance_management_helper_class import get_insurance_farmers_list
+from insurance_management_system.helper.insurance_management_helper_class import get_insurance_insurance_application_list
 from insurance_management_system.helper.model_class import  InsuranceApplicationRequest
 
 class InsuranceApplicationServiceAPIView(APIView):
@@ -24,7 +24,7 @@ class InsuranceApplicationServiceAPIView(APIView):
         try:
             record = build_request_with_user(InsuranceApplicationRequest, request, method='GET')
             #record = AssetInfoRequest(**request.data)
-            result = get_insurance_farmers_list(record)
+            result = get_insurance_insurance_application_list(record)
             return JsonResponse(result)
         except ValidationError as e:
             return JsonResponse({"status": "failed", "errors": e.errors()}, status=400)

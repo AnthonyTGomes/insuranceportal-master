@@ -41,7 +41,7 @@ def get_insurance_farmers_list(record: FarmersInfoRequest):
  # @ Modified time: 2025-06-11 15:58:18
  # @ Description: Function for getting Insurance Application list from DB
 '''
-def get_insurance_farmers_list(record: InsuranceApplicationRequest):
+def get_insurance_insurance_application_list(record: InsuranceApplicationRequest):
     try:
         with get_db_connection() as conn: # calling get_db_connection for getting the connection string
             rows = call_db_function(conn, "public.fn_get_insurance_application_list", [record.json()]) # calling fn_get_assets_list function from DB  to get data.
