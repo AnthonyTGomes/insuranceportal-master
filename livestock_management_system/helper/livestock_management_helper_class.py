@@ -18,6 +18,7 @@ from livestock_management_system.helper.model_class import *
 def get_assets_list(record: AssetInfoRequest):
     try:
         with get_db_connection() as conn: # calling get_db_connection for getting the connection string
+            print(record.dict()) 
             rows = call_db_function(conn, "public.fn_get_assets_list", [record.json()]) # calling fn_get_assets_list function from DB  to get data.
 
             if not rows:

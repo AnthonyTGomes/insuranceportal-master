@@ -24,6 +24,7 @@ class AssetsServiceAPIView(APIView):
     def get(self, request):
         try:
             record = build_request_with_user(AssetInfoRequest, request, method='GET')
+            print (record)
             #record = AssetInfoRequest(**request.data)
             result = get_assets_list(record)
             return JsonResponse(result)

@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, validator
 from datetime import datetime
 from typing import Optional
 
@@ -58,6 +58,7 @@ class AssetMedicalConditionSeverityRequest(BaseModel):
     by_user_id: int = Field(..., description="Auto-injected from request.user.id")
 
 class AssetInfoRequest(BaseModel):
+    asset_id : Optional[int] = -1
     start_record : Optional[int] = None
     page_size: Optional[int] = None
     by_user_id: int = Field(..., description="Auto-injected from request.user.id")
