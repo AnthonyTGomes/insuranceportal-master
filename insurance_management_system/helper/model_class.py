@@ -61,3 +61,16 @@ class InsuranceStatusRequest(BaseModel):
     modified_by: Optional[int] = None
     modified_at: Optional[datetime] = None
     by_user_id: int = Field(..., description="Auto-injected from request.user.id")                
+
+
+class InsurancePaymentInformationRequest(BaseModel):
+    id: Optional[int] = None
+    trx_id: Optional[str] = None
+    trx_date: Optional[date] = None
+    trx_type: Optional[str] = None
+    trx_through: Optional[str] = None
+    created_at: Optional[datetime] = None
+    remarks: Optional[str] = None
+    asset_insurance_id: Optional[int] = None
+    created_by_id: Optional[int] = None
+    amount: Optional[float] = None
