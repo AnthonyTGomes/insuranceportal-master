@@ -144,7 +144,7 @@ def get_insurance_status(record: InsuranceStatusRequest):
  # @ Modified time: 2025-08-11 15:58:18
  # @ Description: Function for getting Insurance Payment List
 '''
-def get_insurance_payment_status(record: InsurancePaymentInformationRequest):
+def get_insurance_payment_list(record: InsurancePaymentInformationRequest):
     try:
         with get_db_connection() as conn: # calling get_db_connection for getting the connection string
             rows = call_db_function(conn, "public.fn_get_insurance_payment_list", [record.json()]) # calling fn_get_assets_list function from DB  to get data.
@@ -161,3 +161,29 @@ def get_insurance_payment_status(record: InsurancePaymentInformationRequest):
 
     except Exception as ex:
         return _response("error", str(ex))    
+    
+
+'''
+ # @ Author: Tanmay Anthony Gomes
+ # @ Create Time: 2025-08-11 15:01:24
+ # @ Modified by: Tanmay Anthony Gomes
+ # @ Modified time: 2025-08-11 15:58:18
+ # @ Description: Function for getting Insurance Payment List
+'''
+def get_insurance_claim_list(record: InsuranceClaimInformationRequest):
+    try:
+        with get_db_connection() as conn: # calling get_db_connection for getting the connection string
+            rows = call_db_function(conn, "public.fn_get_insurance_claim_list", [record.json()]) # calling fn_get_assets_list function from DB  to get data.
+
+            if not rows:
+                return _response("failed", "Error Occured While Processing Request")
+
+            result = rows[0]  
+            data = result["data"]
+            if isinstance(data, str):
+                data = json.loads(data)
+
+            return _response(result["status"], result["message"], data)
+
+    except Exception as ex:
+        return _response("error", str(ex))      

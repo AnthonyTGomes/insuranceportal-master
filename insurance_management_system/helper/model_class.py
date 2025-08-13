@@ -74,3 +74,25 @@ class InsurancePaymentInformationRequest(BaseModel):
     asset_insurance_id: Optional[int] = None
     created_by_id: Optional[int] = None
     amount: Optional[float] = None
+    by_user_id: int = Field(..., description="Auto-injected from request.user.id")  
+
+class InsuranceClaimInformationRequest(BaseModel):
+    id: Optional[int] = None
+    claim_date: Optional[date] = None
+    reason: Optional[str] = None
+    amount_claimed: Optional[float] = None
+    amount_approved: Optional[float] = None
+    claim_status: Optional[str] = None
+    rejection_reason: Optional[str] = None
+    processed_date: Optional[date] = None
+    settlement_documents: Optional[str] = None
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
+    remarks: Optional[str] = None
+    asset_insurance_id: Optional[int] = None
+    created_by_id: Optional[int] = None
+    updated_by_id: Optional[int] = None
+    claim_muzzle: Optional[str] = None
+    insured_asset_id: Optional[int] = None
+    reference_id: Optional[str] = None
+    by_user_id: int = Field(..., description="Auto-injected from request.user.id")         
