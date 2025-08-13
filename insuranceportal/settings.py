@@ -204,6 +204,8 @@ CORS_ALLOWED_ORIGINS = [
     "https://insuranceportal.insurecow.com",
     "http://localhost:3000",
     "https://farmmanagement.insurecow.com",
+    "http://centralportal.insurecow.com",
+    "https://centralportal.insurecow.com",
 
 ]
 DATA_UPLOAD_MAX_MEMORY_SIZE = 314572800
