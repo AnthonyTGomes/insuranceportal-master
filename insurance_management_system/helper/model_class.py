@@ -96,3 +96,9 @@ class InsuranceClaimInformationRequest(BaseModel):
     insured_asset_id: Optional[int] = None
     reference_id: Optional[str] = None
     by_user_id: int = Field(..., description="Auto-injected from request.user.id")         
+
+class InsuranceStatusHistoryRequest(BaseModel):
+    insurance_status_id: Optional[int] = None
+    status_name: Optional[str] = None
+    asset_insurance_id : Optional[int] = None
+    by_user_id: int = Field(..., description="Auto-injected from request.user.id")  
