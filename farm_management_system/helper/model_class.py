@@ -22,10 +22,10 @@ class FarmOrgInfoRequest(BaseModel):
     by_user_id: int = Field(..., description="Auto-injected from request.user.id")
 
 
-class FarmOrgFarmersInfoRequest(BaseModel):
-    farm_org_farmer_id: Optional[int] = None
+class FarmOrgUserInfoRequest(BaseModel):
+    farm_org_user_id: Optional[int] = None
     com_org_id: Optional[int] = None
-    farmer_user_id: Optional[int] = None
+    user_id: Optional[int] = None
     created_at: Optional[datetime] = None
     modified_at: Optional[datetime] = None
     is_active: Optional[bool] = None

@@ -7,10 +7,10 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from common.common_class.util import build_request_with_user
-from farm_management_system.helper.insurance_management_helper_class import get_farm_org_farmer_list, insert_farm_org_farmers, update_farm_org_farmers
-from farm_management_system.helper.model_class import FarmOrgFarmersInfoRequest
+from farm_management_system.helper.insurance_management_helper_class import  get_farm_org_user_list,  insert_farm_org_users,  update_farm_org_users
+from farm_management_system.helper.model_class import FarmOrgUserInfoRequest
 
-class FarmOrgFarmersServiceAPIView(APIView):
+class FarmOrgUsersServiceAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     """
@@ -23,9 +23,9 @@ class FarmOrgFarmersServiceAPIView(APIView):
 
     def post(self, request):
         try:
-            record = build_request_with_user(FarmOrgFarmersInfoRequest, request, method='POST')
+            record = build_request_with_user(FarmOrgUserInfoRequest, request, method='POST')
             #record = AssetInfoRequest(**request.data)
-            result = insert_farm_org_farmers(record)
+            result = insert_farm_org_users(record)
             return JsonResponse(result)
         except ValidationError as e:
             return JsonResponse({"status": "failed", "errors": e.errors()}, status=400)    
@@ -40,9 +40,9 @@ class FarmOrgFarmersServiceAPIView(APIView):
 
     def get(self, request):
         try:
-            record = build_request_with_user(FarmOrgFarmersInfoRequest, request, method='GET')
+            record = build_request_with_user(FarmOrgUserInfoRequest, request, method='GET')
             #record = AssetInfoRequest(**request.data)
-            result = get_farm_org_farmer_list(record)
+            result = get_farm_org_user_list(record)
             return JsonResponse(result)
         except ValidationError as e:
             return JsonResponse({"status": "failed", "errors": e.errors()}, status=400)       
@@ -57,9 +57,9 @@ class FarmOrgFarmersServiceAPIView(APIView):
 
     def put(self, request):
         try:
-            record = build_request_with_user(FarmOrgFarmersInfoRequest, request, method='PUT')
+            record = build_request_with_user(FarmOrgUserInfoRequest, request, method='PUT')
             #record = AssetInfoRequest(**request.data)
-            result = update_farm_org_farmers(record)
+            result = update_farm_org_users(record)
             return JsonResponse(result)
         except ValidationError as e:
             return JsonResponse({"status": "failed", "errors": e.errors()}, status=400)  

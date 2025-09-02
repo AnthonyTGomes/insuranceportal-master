@@ -3,7 +3,7 @@ from django.conf import settings
 import json
 from common.common_class.util import _response
 from db import *
-from farm_management_system.helper.model_class import FarmOrgFarmersInfoRequest, FarmOrgInfoRequest
+from farm_management_system.helper.model_class import FarmOrgInfoRequest, FarmOrgUserInfoRequest
 
 '''
  # @ Author: Tanmay Anthony Gomes
@@ -88,10 +88,10 @@ def get_farm_organization_list(record: FarmOrgInfoRequest):
  # @ Modified time: 
  # @ Description: Function for inserting farm organizartions farmers into DB
 '''
-def insert_farm_org_farmers(record: FarmOrgFarmersInfoRequest):
+def insert_farm_org_users(record: FarmOrgUserInfoRequest):
     try:
         with get_db_connection() as conn: # calling get_db_connection for getting the connection string
-            rows = call_db_function(conn, "public.fn_insert_farm_org_farmers", [record.json()]) # calling fn_get_assets_list function from DB  to get data.
+            rows = call_db_function(conn, "public.fn_insert_farm_org_users", [record.json()]) # calling fn_get_assets_list function from DB  to get data.
 
             if not rows:
                 return _response("failed", "Error Occured While Processing Request")
@@ -113,10 +113,10 @@ def insert_farm_org_farmers(record: FarmOrgFarmersInfoRequest):
  # @ Modified time: 
  # @ Description: Function for updating farm organizartions farmers into DB
 '''
-def update_farm_org_farmers(record: FarmOrgFarmersInfoRequest):
+def update_farm_org_users(record: FarmOrgUserInfoRequest):
     try:
         with get_db_connection() as conn: # calling get_db_connection for getting the connection string
-            rows = call_db_function(conn, "public.fn_update_farm_org_farmers", [record.json()]) # calling fn_get_assets_list function from DB  to get data.
+            rows = call_db_function(conn, "public.fn_update_farm_org_users", [record.json()]) # calling fn_get_assets_list function from DB  to get data.
 
             if not rows:
                 return _response("failed", "Error Occured While Processing Request")
@@ -139,10 +139,10 @@ def update_farm_org_farmers(record: FarmOrgFarmersInfoRequest):
  # @ Modified time: 
  # @ Description: Function for getting farm organizartions farmers list into DB
 '''
-def get_farm_org_farmer_list(record: FarmOrgFarmersInfoRequest):
+def get_farm_org_user_list(record: FarmOrgUserInfoRequest):
     try:
         with get_db_connection() as conn: # calling get_db_connection for getting the connection string
-            rows = call_db_function(conn, "public.fn_get_farm_org_farmer_list", [record.json()]) # calling fn_get_assets_list function from DB  to get data.
+            rows = call_db_function(conn, "public.fn_get_farm_org_user_list", [record.json()]) # calling fn_get_assets_list function from DB  to get data.
 
             if not rows:
                 return _response("failed", "Error Occured While Processing Request")
