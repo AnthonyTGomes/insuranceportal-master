@@ -16,7 +16,8 @@ urlpatterns = [
     path('api/v1/', include('apiservice.urls')),
     path('api/lms/', include('livestock_management_system.urls')),
     path('api/gls/', include('general_accounting_management_system.urls')),  
-    path('api/ims/', include('insurance_management_system.urls')),    
+    path('api/ims/', include('insurance_management_system.urls')), 
+    path('api/fms/', include('farm_management_system.urls')),   
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT})
 ]
