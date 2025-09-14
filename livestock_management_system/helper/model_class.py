@@ -85,3 +85,18 @@ class AssetLocationHistoryRequest(BaseModel):
     start_record : Optional[int] = None
     page_size: Optional[int] = None
     by_user_id: int = Field(..., description="Auto-injected from request.user.id")  
+
+
+class AssetProductionRecordsRequest(BaseModel):
+    id: int = None
+    production_type_id: int = None
+    quantity: float = None
+    date: Optional[datetime] = None
+    remarks: Optional[str] = None
+    created_at: Optional[datetime] = None
+    created_by: Optional[int] = None
+    modified_at: Optional[datetime] = None
+    modified_by: Optional[int] = None
+    is_active: Optional[bool] = None
+    asset_id: int = None
+    by_user_id: int = Field(..., description="Auto-injected from request.user.id")  

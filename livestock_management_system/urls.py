@@ -1,6 +1,7 @@
 # user_management_system/urls.py
 from django.urls import path
 from livestock_management_system.controller import livestock_management_api
+from livestock_management_system.controller.asset_production_record_service_api import AssetProductionRecordServiceAPIView
 from livestock_management_system.controller.assets_service_api import AssetsServiceAPIView
 from livestock_management_system.controller.health_record_service_api import HealthRecordServiceAPIView
 from livestock_management_system.controller.health_record_status_history_service_api import HealthRecordStatusHistoryServiceAPIView
@@ -26,5 +27,6 @@ urlpatterns = [
     path('vaccination-schedule-service/', VaccinationScheduleServiceAPIView.as_view(), name='vaccination-schedule-service'),   
     path('vaccine-service/', VaccineServiceAPIView.as_view(), name='vaccine-service'),    
     path('health-record-status-history-service/', HealthRecordStatusHistoryServiceAPIView.as_view(), name='health-record-status-history-service'),
-    path('health-status-service/', HealthStatusServiceAPIView.as_view(), name='health-status-service'),           
+    path('health-status-service/', HealthStatusServiceAPIView.as_view(), name='health-status-service'),         
+    path('production-record-service/', AssetProductionRecordServiceAPIView.as_view(), name='production-record-service'),     
 ]
