@@ -3,6 +3,7 @@ from datetime import datetime
 from typing import Optional
 
 class HealthRecordRequest(BaseModel):
+    id: Optional[int] = None 
     condition_id: Optional[int] = None
     severity_id: Optional[int] = None
     symptoms: Optional[str] = None
