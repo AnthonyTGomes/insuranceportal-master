@@ -41,10 +41,10 @@ class AssetProductionRecordServiceAPIView(APIView):
 
     def get(self, request):
         try:
-            record = get_asset_production_records(AssetProductionRecordsRequest, request, method='GET')
+            record = build_request_with_user(AssetProductionRecordsRequest, request, method='GET')
             print (record)
             #record = AssetInfoRequest(**request.data)
-            result = add_asset_production_records(record)
+            result = get_asset_production_records(record)
             return JsonResponse(result)
         except ValidationError as e:
             return JsonResponse({"status": "failed", "errors": e.errors()}, status=400)    
