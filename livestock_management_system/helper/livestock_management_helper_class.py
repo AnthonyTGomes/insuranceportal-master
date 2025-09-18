@@ -336,7 +336,7 @@ def update_asset_vaccination_schedule_status(record: VaccinationScheduleRequest)
  # @ Modified time: -
  # @ Description: FUnction for getting assets production types
  '''
-def get_asset_production_records(record: AssetProductionTypeRequest):
+def get_asset_production_type(record: AssetProductionTypeRequest):
     try:
         with get_db_connection() as conn: # calling get_db_connection for getting the connection string
             rows = call_db_function(conn, "public.fn_get_asset_production_type", [record.json()]) # calling fn_get_assets_list function from DB  to get data.
