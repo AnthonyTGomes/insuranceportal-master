@@ -325,4 +325,31 @@ def update_asset_vaccination_schedule_status(record: VaccinationScheduleRequest)
             return _response(result["status"], result["message"], data)
 
     except Exception as ex:
-        return _response("error", str(ex))          
+        return _response("error", str(ex)) 
+
+
+
+'''
+ # @ Author: Tanmay Anthony Gomes
+ # @ Create Time: 18-Sep-2025 10:25:24 AM
+ # @ Modified by: -
+ # @ Modified time: -
+ # @ Description: FUnction for getting assets production types
+ '''
+def get_asset_production_records(record: AssetProductionTypeRequest):
+    try:
+        with get_db_connection() as conn: # calling get_db_connection for getting the connection string
+            rows = call_db_function(conn, "public.fn_get_asset_production_type", [record.json()]) # calling fn_get_assets_list function from DB  to get data.
+
+            if not rows:
+                return _response("failed", "Error Occured While Processing Request")
+
+            result = rows[0]  
+            data = result["data"]
+            if isinstance(data, str):
+                data = json.loads(data)
+
+            return _response(result["status"], result["message"], data)
+
+    except Exception as ex:
+        return _response("error", str(ex)) 

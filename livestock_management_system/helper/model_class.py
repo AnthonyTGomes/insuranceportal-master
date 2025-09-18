@@ -101,3 +101,15 @@ class AssetProductionRecordsRequest(BaseModel):
     is_active: Optional[bool] = None
     asset_id: int = None
     by_user_id: int = Field(..., description="Auto-injected from request.user.id")  
+
+
+class AssetProductionTypeRequest(BaseModel):
+    id: int = None
+    type_name: Optional[str] = None
+    remarks: Optional[str] = None
+    created_at: Optional[datetime] = None
+    created_by: Optional[int] = None
+    modified_at: Optional[datetime] = None
+    modified_by: Optional[int] = None
+    is_active: Optional[bool] = None
+    by_user_id: int = Field(..., description="Auto-injected from request.user.id")     

@@ -8,6 +8,7 @@ from livestock_management_system.controller.health_record_status_history_service
 from livestock_management_system.controller.health_status_service_api import HealthStatusServiceAPIView
 from livestock_management_system.controller.medical_condition_service_api import MedicalConditionServiceAPIView
 from livestock_management_system.controller.medical_condition_severity_service_api import MedicalConditionSeverityServiceAPIView
+from livestock_management_system.controller.production_type_service_api import ProductionTypeServiceAPIView
 from livestock_management_system.controller.vaccination_schedule_service_api import VaccinationScheduleServiceAPIView
 from livestock_management_system.controller.vaccination_status_compleatation_service_api import VaccinationStatusCompleatationServiceAPIView
 from livestock_management_system.controller.vaccine_service_api import VaccineServiceAPIView
@@ -31,5 +32,7 @@ urlpatterns = [
     path('health-status-service/', HealthStatusServiceAPIView.as_view(), name='health-status-service'),         
     path('production-record-service/', AssetProductionRecordServiceAPIView.as_view(), name='production-record-service'),    
     path('vaccination-status-compleatation-service/', VaccinationStatusCompleatationServiceAPIView.as_view(), name='vaccination-status-compleatation-service/'), 
+    path('production-type-service/', ProductionTypeServiceAPIView.as_view(), name='production-type-service/'), 
+    
      
 ]
