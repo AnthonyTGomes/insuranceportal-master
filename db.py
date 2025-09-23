@@ -4,8 +4,25 @@
 import psycopg2
 from django.conf import settings
 
+# def get_db_connection():
+#     db = settings.DATABASES['default']
+#     return psycopg2.connect(
+#         dbname=db['NAME'],
+#         user=db['USER'],
+#         password=db['PASSWORD'],
+#         host=db['HOST'],
+#         port=db['PORT'],
+#     )
+
 def get_db_connection():
     db = settings.DATABASES['default']
+
+    # Safety check (extra layer)
+    if settings.DJANGO_ENV != "production" and "LIVE" in db["NAME"].upper():
+        raise RuntimeError("❌ Dev mode cannot connect to LIVE DB!")
+
+    print(f"🔌 Connecting to DB: {db['NAME']} as {db['USER']} on {db['HOST']}:{db['PORT']}")
+    
     return psycopg2.connect(
         dbname=db['NAME'],
         user=db['USER'],
@@ -13,6 +30,8 @@ def get_db_connection():
         host=db['HOST'],
         port=db['PORT'],
     )
+
+
 
 # Function to call a database function with parameters
 # This function executes a database function and returns the results as a list of dictionaries.

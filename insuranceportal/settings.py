@@ -15,6 +15,8 @@ import os
 from datetime import timedelta
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -107,17 +109,39 @@ AUTH_USER_MODEL = 'authservice.User'
 #     }
 # }
 
-# DB
-DATABASES = {
-    'default': {
-        'ENGINE': config("POSTGRE_DB_ENGINE"),
-        'NAME': config("POSTGRE_DB_NAME"),
-        'USER': config("POSTGRE_DB_USER"),
-        'PASSWORD': config("POSTGRE_DB_PASSWORD"),
-        'HOST': config("POSTGRE_DB_HOST"),
-        'PORT': config("POSTGRE_DB_PORT"),
+dotenv_path = os.path.join(os.path.dirname(__file__), '..', '.env')
+load_dotenv(dotenv_path)
+
+DJANGO_ENV = os.getenv("DJANGO_ENV", "development")
+print("DJANGO_ENV from os.environ:", os.environ.get("DJANGO_ENV"))
+print("DJANGO_ENV from getenv:", os.getenv("DJANGO_ENV", "development"))
+if DJANGO_ENV == "production":
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.getenv("LIVE_POSTGRE_DB_NAME"),
+            "USER": os.getenv("LIVE_POSTGRE_DB_USER"),
+            "PASSWORD": os.getenv("LIVE_POSTGRE_DB_PASSWORD"),
+            "HOST": os.getenv("LIVE_POSTGRE_DB_HOST"),
+            "PORT": os.getenv("LIVE_POSTGRE_DB_PORT"),
+        }
     }
-}
+else:  # development
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.getenv("DEV_POSTGRE_DB_NAME"),
+            "USER": os.getenv("DEV_POSTGRE_DB_USER"),
+            "PASSWORD": os.getenv("DEV_POSTGRE_DB_PASSWORD"),
+            "HOST": os.getenv("DEV_POSTGRE_DB_HOST"),
+            "PORT": os.getenv("DEV_POSTGRE_DB_PORT"),
+        }
+    }
+
+# Safety lock: prevent accidental prod access in dev
+db_name = DATABASES['default']['NAME']
+if DJANGO_ENV != "production" and "LIVE" in db_name.upper():
+    raise RuntimeError("❌ Attempting to connect to live DB while in development!")
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
